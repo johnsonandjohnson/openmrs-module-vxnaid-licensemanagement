@@ -1,0 +1,87 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.openmrs.maven.parents</groupId>
+        <artifactId>maven-parent-openmrs-module</artifactId>
+        <version>1.1.0</version>
+    </parent>
+
+    <groupId>org.openmrs.module</groupId>
+    <artifactId>licensemanagement</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>License Management</name>
+    <description>Manage licenses and devices which use them.</description>
+
+    <!-- TODO: Add module's project URL -->
+    <!--<url>https://wiki.openmrs.org/x/FQ4z</url>-->
+
+    <!-- TODO: Add SCM URLs -->
+    <!--<scm>
+        <connection>scm:git:git@github.com:openmrs/openmrs-module-licensemanagement.git</connection>
+        <developerConnection>scm:git:git@github.com:openmrs/openmrs-module-licensemanagement.git</developerConnection>
+        <url>https://github.com/openmrs/openmrs-module-licensemanagement/</url>
+    </scm>-->
+
+    <modules>
+        <module>api</module>
+        <module>omod</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.openmrs.distro</groupId>
+                <artifactId>referenceapplication</artifactId>
+                <version>2.4</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>openmrs-repo</id>
+            <name>OpenMRS Nexus Repository</name>
+            <url>http://mavenrepo.openmrs.org/nexus/content/repositories/public</url>
+        </repository>
+        <repository>
+            <id>central</id>
+            <name>Maven Repository Switchboard</name>
+            <layout>default</layout>
+            <url>http://repo1.maven.org/maven2</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>openmrs-repo</id>
+            <name>OpenMRS Nexus Repository</name>
+            <url>http://mavenrepo.openmrs.org/nexus/content/repositories/public</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <properties>
+        <openmrsPlatformVersion>1.11.6</openmrsPlatformVersion>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <!-- Disable OpenMRS code formatting, because it seems obsolete -->
+                <groupId>com.googlecode.maven-java-formatter-plugin</groupId>
+                <artifactId>maven-java-formatter-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>none</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
