@@ -2,8 +2,10 @@ package org.openmrs.module.licensemanagement;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.openmrs.Attributable;
-import org.openmrs.BaseCustomizableMetadata;
+import org.openmrs.BaseOpenmrsMetadata;
 import org.openmrs.api.context.Context;
+import org.openmrs.customdatatype.CustomValueDescriptor;
+import org.openmrs.customdatatype.Customizable;
 import org.openmrs.module.licensemanagement.api.DeviceService;
 
 import javax.persistence.CascadeType;
@@ -16,6 +18,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -29,7 +33,8 @@ import java.util.Set;
  */
 @Entity(name = "licensemanagement.Device")
 @Table(name = "licensemgmt_device")
-public class Device extends BaseCustomizableMetadata<DeviceAttribute> implements Serializable, Attributable<Device> {
+public class Device extends BaseOpenmrsMetadata
+        implements Serializable, Attributable<Device>, Customizable<DeviceAttribute> {
 
     @Id
     @GeneratedValue
@@ -43,7 +48,7 @@ public class Device extends BaseCustomizableMetadata<DeviceAttribute> implements
     // has no annotations)
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "device")
     @OrderBy("voided asc")
-    private Set<DeviceAttribute> deviceAttributes = new LinkedHashSet<DeviceAttribute>();
+    private Set<DeviceAttribute> attributes = new LinkedHashSet<DeviceAttribute>();
 
     @Override
     public Integer getId() {
@@ -90,17 +95,6 @@ public class Device extends BaseCustomizableMetadata<DeviceAttribute> implements
     }
 
     @Override
-    public Set<DeviceAttribute> getAttributes() {
-        return deviceAttributes;
-    }
-
-    @Override
-    public void setAttributes(Set<DeviceAttribute> attributes) {
-        this.deviceAttributes = attributes;
-        super.setAttributes(deviceAttributes);
-    }
-
-    @Override
     public Device hydrate(String deviceId) {
         try {
             return Context.getService(DeviceService.class).getDevice(Integer.valueOf(deviceId));
@@ -135,5 +129,88 @@ public class Device extends BaseCustomizableMetadata<DeviceAttribute> implements
     @Override
     public String getDisplayString() {
         return this.getName();
+    }
+
+    @Override
+    public Set<DeviceAttribute> getAttributes() {
+        return this.attributes;
+    }
+
+    public void setAttributes(Set<DeviceAttribute> attributes) {
+        this.attributes = attributes;
+    }
+
+    @Override
+    public Collection<DeviceAttribute> getActiveAttributes() {
+        List<DeviceAttribute> ret = new ArrayList<DeviceAttribute>();
+        if (this.getAttributes() != null) {
+
+            for (DeviceAttribute attr : this.getAttributes()) {
+                if (!attr.isVoided()) {
+                    ret.add(attr);
+                }
+            }
+        }
+
+        return ret;
+    }
+
+    @Override
+    public List<DeviceAttribute> getActiveAttributes(CustomValueDescriptor ofType) {
+        List<DeviceAttribute> ret = new ArrayList<DeviceAttribute>();
+        if (this.getAttributes() != null) {
+
+            for (DeviceAttribute attr : this.getAttributes()) {
+                if (attr.getAttributeType().equals(ofType) && !attr.isVoided()) {
+                    ret.add(attr);
+                }
+            }
+        }
+
+        return ret;
+    }
+
+    @Override
+    public void addAttribute(DeviceAttribute attribute) {
+        if (this.getAttributes() == null) {
+            this.setAttributes(new LinkedHashSet<DeviceAttribute>());
+        }
+
+        this.getAttributes().add(attribute);
+        attribute.setOwner(this);
+    }
+
+    public void setAttribute(DeviceAttribute attribute) {
+        if (this.getAttributes() == null) {
+            this.addAttribute(attribute);
+        } else {
+            if (this.getActiveAttributes(attribute.getAttributeType()).size() == 1) {
+                final DeviceAttribute existing = this.getActiveAttributes(attribute.getAttributeType()).get(0);
+                if (!existing.getValue().equals(attribute.getValue())) {
+                    if (existing.getId() != null) {
+                        existing.setVoided(true);
+                    } else {
+                        this.getAttributes().remove(existing);
+                    }
+
+                    this.getAttributes().add(attribute);
+                    attribute.setOwner(this);
+                }
+            } else {
+
+                for (DeviceAttribute existing : this.getActiveAttributes(attribute.getAttributeType())) {
+                    if (existing.getAttributeType().equals(attribute.getAttributeType())) {
+                        if (existing.getId() != null) {
+                            existing.setVoided(true);
+                        } else {
+                            this.getAttributes().remove(existing);
+                        }
+                    }
+                }
+
+                this.getAttributes().add(attribute);
+                attribute.setOwner(this);
+            }
+        }
     }
 }
