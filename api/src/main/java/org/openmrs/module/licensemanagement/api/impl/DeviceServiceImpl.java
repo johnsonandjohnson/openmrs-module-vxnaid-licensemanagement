@@ -128,7 +128,7 @@ public class DeviceServiceImpl extends BaseOpenmrsService implements DeviceServi
     }
 
     @Override
-    public DeviceAttributeType retireDeviceAttributeType(DeviceAttributeType deviceAttributeType) throws APIException {
+    public DeviceAttributeType retireDeviceAttributeType(DeviceAttributeType deviceAttributeType, String retireReason) throws APIException {
         // Fields are set by org.openmrs.aop.RequiredDataAdvice
         return deviceDAO.saveDeviceAttributeType(deviceAttributeType);
     }

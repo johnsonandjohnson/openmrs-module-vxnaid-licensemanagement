@@ -9,6 +9,7 @@ import org.openmrs.module.licensemanagement.UsedLicense;
 import org.openmrs.module.licensemanagement.api.LicenseService;
 import org.openmrs.module.licensemanagement.api.dao.LicenseDAO;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +65,7 @@ public class LicenseServiceImpl extends BaseOpenmrsService implements LicenseSer
     }
 
     @Override
-    public License retireLicense(final License license) throws APIException {
+    public License retireLicense(final License license, final String retireReason) throws APIException {
         // Fields are set by org.openmrs.aop.RequiredDataAdvice
         return licenseDAO.saveLicense(license);
     }

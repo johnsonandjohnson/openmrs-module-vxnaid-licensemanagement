@@ -37,7 +37,7 @@ public interface LicenseService {
     License saveLicense(License license) throws APIException;
 
     @Authorized(PrivilegeConstants.MANAGE_LICENSES)
-    License retireLicense(License license) throws APIException;
+    License retireLicense(License license, String retireReason) throws APIException;
 
     @Authorized(PrivilegeConstants.MANAGE_LICENSES)
     License unretireLicense(License license) throws APIException;
