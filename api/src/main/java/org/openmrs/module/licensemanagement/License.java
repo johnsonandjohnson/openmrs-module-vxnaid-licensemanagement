@@ -1,7 +1,9 @@
 package org.openmrs.module.licensemanagement;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openmrs.BaseOpenmrsMetadata;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +20,7 @@ import javax.persistence.Table;
  */
 @Entity(name = "licensemanagement.License")
 @Table(name = "licensemgmt_license")
+@AttributeOverride(name = "name", column = @Column(name = "name", nullable = true, length = 255))
 public class License extends BaseOpenmrsMetadata {
 
     @Id
@@ -28,7 +31,7 @@ public class License extends BaseOpenmrsMetadata {
     @Column(name = "serial_no", columnDefinition = "text", length = Integer.MAX_VALUE)
     private String serialNo;
 
-    @Column(name = "online")
+    @Column(name = "online", columnDefinition = "text", length = Integer.MAX_VALUE)
     private String online;
 
     @ManyToOne(optional = false)
@@ -85,5 +88,16 @@ public class License extends BaseOpenmrsMetadata {
 
     public void setLicenseType(LicenseType licenseType) {
         this.licenseType = licenseType;
+    }
+
+    public String getDisplayString() {
+        if (!StringUtils.isEmpty(getName())) {
+            return getName();
+        } else if (!StringUtils.isEmpty(getSerialNo())) {
+            final String serialNo = getSerialNo();
+            return serialNo.substring(0, Math.min(serialNo.length(), 16));
+        } else {
+            return getUuid();
+        }
     }
 }

@@ -15,8 +15,6 @@ import org.springframework.stereotype.Component;
  * DeviceAttributeType of LicenseDatatype named 'Iris license' can be used to assign a License used
  * for iris scans to any Device.
  * </p>
- *
- * @see org.openmrs.module.licensemanagement.attribute.handler.LicenseDatatypeHandler
  */
 @Component
 public class LicenseDatatype extends SerializingCustomDatatype<License> {

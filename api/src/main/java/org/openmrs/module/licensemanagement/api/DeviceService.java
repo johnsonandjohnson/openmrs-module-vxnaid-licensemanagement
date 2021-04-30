@@ -67,7 +67,7 @@ public interface DeviceService extends OpenmrsService {
     DeviceAttributeType saveDeviceAttributeType(DeviceAttributeType deviceAttributeType) throws APIException;
 
     @Authorized(PrivilegeConstants.MANAGE_DEVICE_ATTRIBUTE_TYPES)
-    DeviceAttributeType retireDeviceAttributeType(DeviceAttributeType deviceAttributeType) throws APIException;
+    DeviceAttributeType retireDeviceAttributeType(DeviceAttributeType deviceAttributeType, String retireReason) throws APIException;
 
     @Authorized(PrivilegeConstants.MANAGE_DEVICE_ATTRIBUTE_TYPES)
     DeviceAttributeType unretireDeviceAttributeType(DeviceAttributeType deviceAttributeType) throws APIException;
