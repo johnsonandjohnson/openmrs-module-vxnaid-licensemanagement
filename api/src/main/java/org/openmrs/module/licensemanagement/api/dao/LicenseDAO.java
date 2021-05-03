@@ -29,7 +29,8 @@ public class LicenseDAO extends BaseLicenseManagementOpenmrsMetadataDAO<License>
                     "LEFT JOIN licensemgmt_device_attribute AS da ON da.value_reference = l.uuid " +
                     "LEFT JOIN licensemgmt_device_attribute_type AS dat ON dat.device_attribute_type_id = da" +
                     ".attribute_type_id and dat.datatype = '" + LicenseDatatype.class.getName() + "' " + //
-                    "WHERE l.license_type_id = :licenseTypeId and l.retired = false and da.device_attribute_id is null";
+                    "WHERE l.license_type_id = :licenseTypeId and l.retired = false " +
+                    "and (da.device_attribute_id is null or da.voided = true)";
 
     public LicenseDAO() {
         super(License.class);
