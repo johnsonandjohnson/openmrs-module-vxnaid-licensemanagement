@@ -7,7 +7,6 @@ import org.openmrs.module.licensemanagement.License;
 import org.openmrs.module.licensemanagement.LicenseType;
 import org.openmrs.module.licensemanagement.customdatatype.datatype.LicenseDatatype;
 import org.springframework.stereotype.Repository;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,11 +25,11 @@ public class LicenseDAO extends BaseLicenseManagementOpenmrsMetadataDAO<License>
     private static final String GET_LICENSE_NOT_LINKED_BY_DEVICE_ATTRIBUTE_SQL = //
             "SELECT l.license_id " +//
                     "FROM licensemgmt_license AS l " + //
-                    "LEFT JOIN licensemgmt_device_attribute AS da ON da.value_reference = l.uuid " +
+                    "LEFT JOIN licensemgmt_device_attribute AS da ON da.value_reference = l.uuid and da.voided = false " +
                     "LEFT JOIN licensemgmt_device_attribute_type AS dat ON dat.device_attribute_type_id = da" +
                     ".attribute_type_id and dat.datatype = '" + LicenseDatatype.class.getName() + "' " + //
                     "WHERE l.license_type_id = :licenseTypeId and l.retired = false " +
-                    "and (da.device_attribute_id is null or da.voided = true)";
+                    "and da.device_attribute_id is null";
 
     public LicenseDAO() {
         super(License.class);
@@ -53,9 +52,12 @@ public class LicenseDAO extends BaseLicenseManagementOpenmrsMetadataDAO<License>
     }
 
     public List<License> getLicensesByType(final LicenseType licenseType) {
-        final Criteria criteria = getSession()
-                .createCriteria(License.class)
-                .add(Restrictions.and(Restrictions.eq("retired", false), Restrictions.eq("licenseType", licenseType)));
+        final Criteria criteria = getSession().createCriteria(License.class).add(Restrictions.and(Restrictions
+                                                                                                          .eq("retired",
+                                                                                                              false),
+                                                                                                  Restrictions
+                                                                                                          .eq("licenseType",
+                                                                                                              licenseType)));
         return criteria.list();
     }
 
@@ -68,16 +70,14 @@ public class LicenseDAO extends BaseLicenseManagementOpenmrsMetadataDAO<License>
     }
 
     public List<DeviceAttribute> getDeviceAttributeWithLicense(LicenseType licenseType) {
-        final List attributeIds = getSession()
-                .createSQLQuery(GET_DEVICE_ATTRIBUTE_WITH_LICENSE_SQL)
-                .setParameter("licenseTypeId", licenseType.getId())
-                .list();
+        final List attributeIds = getSession().createSQLQuery(GET_DEVICE_ATTRIBUTE_WITH_LICENSE_SQL)
+                                              .setParameter("licenseTypeId", licenseType.getId()).list();
 
         final List<DeviceAttribute> result = new ArrayList<DeviceAttribute>();
 
         for (final Object deviceAttributeId : attributeIds) {
-            final DeviceAttribute attribute =
-                    (DeviceAttribute) getSession().get(DeviceAttribute.class, ((Number) deviceAttributeId).intValue());
+            final DeviceAttribute attribute = (DeviceAttribute) getSession()
+                    .get(DeviceAttribute.class, ((Number) deviceAttributeId).intValue());
 
             result.add(attribute);
         }
@@ -86,10 +86,8 @@ public class LicenseDAO extends BaseLicenseManagementOpenmrsMetadataDAO<License>
     }
 
     public List<License> getLicenseNotLinkedByDeviceAttribute(LicenseType licenseType) {
-        final List licenseIds = getSession()
-                .createSQLQuery(GET_LICENSE_NOT_LINKED_BY_DEVICE_ATTRIBUTE_SQL)
-                .setParameter("licenseTypeId", licenseType.getId())
-                .list();
+        final List licenseIds = getSession().createSQLQuery(GET_LICENSE_NOT_LINKED_BY_DEVICE_ATTRIBUTE_SQL)
+                                            .setParameter("licenseTypeId", licenseType.getId()).list();
 
         final List<License> result = new ArrayList<License>();
 
