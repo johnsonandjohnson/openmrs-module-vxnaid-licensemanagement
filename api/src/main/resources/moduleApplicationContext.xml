@@ -16,6 +16,10 @@
     <bean id="licensemanagement.DeviceDAO" class="org.openmrs.module.licensemanagement.api.dao.DeviceDAO">
         <property name="dbSessionFactory" ref="dbSessionFactory"/>
     </bean>
+
+    <bean id="licensemanagement.DeviceErrorDAO" class="org.openmrs.module.licensemanagement.api.dao.DeviceErrorDAO">
+        <property name="dbSessionFactory" ref="dbSessionFactory"/>
+    </bean>
     <!-- End DAOs -->
 
     <!-- Adds DeviceService bean. -->
@@ -51,6 +55,19 @@
         <property name="target">
             <bean class="org.openmrs.module.licensemanagement.api.impl.LicenseServiceImpl">
                 <property name="licenseDAO" ref="licensemanagement.LicenseDAO"/>
+            </bean>
+        </property>
+        <property name="preInterceptors" ref="serviceInterceptors"/>
+        <property name="transactionAttributeSource" ref="transactionAttributeSource"/>
+    </bean>
+
+    <!-- Adds DeviceErrorService bean. -->
+    <bean id="licensemanagement.DeviceErrorService"
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target">
+            <bean class="org.openmrs.module.licensemanagement.api.impl.DeviceErrorServiceImpl">
+                <property name="deviceErrorDAO" ref="licensemanagement.DeviceErrorDAO"/>
             </bean>
         </property>
         <property name="preInterceptors" ref="serviceInterceptors"/>

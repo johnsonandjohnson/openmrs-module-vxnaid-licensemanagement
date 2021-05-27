@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <licensemgmt_device device_id="1" device_mac="AA:00:00:00:00:01" name="Device 1" description="Device one"
+                        creator="1" date_created="2021-01-01 00:00:00.0" retired="false"
+                        uuid="f08ba64b-2000-0000-0000-000000000001"/>
+    <licensemgmt_device device_id="2" device_mac="AA:00:00:00:00:02" name="XDevice 2" description="Device two"
+                        creator="1" date_created="2021-01-01 00:00:00.0" retired="false"
+                        uuid="f08ba64b-2000-0000-0000-000000000002"/>
+    <licensemgmt_device device_id="3" device_mac="AA:00:00:00:00:03" name="Device 3" description="Device three"
+                        creator="1" date_created="2021-01-01 00:00:00.0" retired="true" retire_reason="Test"
+                        uuid="f08ba64b-2000-0000-0000-000000000003"/>
+
+    <licensemgmt_device_error device_error_id="1" device_id="1" error_type="license"
+                              error_key="license:IRIS_CLIENT,GET_LICENSE_CALL" reported_date="2021-05-18 14:12:58"
+                              meta='{type: \"license\",licenseType: \"IRIS_CLIENT\",action: \"GET_LICENSE_CALL\"}'
+                              creator="1" date_created="2021-01-01 00:00:00.0" voided="false"
+                              uuid="f08ba64b-0000-0000-0000-000000000000"/>
+</dataset>
