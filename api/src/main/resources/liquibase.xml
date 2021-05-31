@@ -322,8 +322,14 @@
             <column name="device_id" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="error_type" type="varchar(255)">
+            <column name="meta_type" type="varchar(255)">
                 <constraints nullable="false"/>
+            </column>
+            <column name="meta_sub_type" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="meta_value" type="varchar(255)">
+                <constraints nullable="true"/>
             </column>
             <column name="error_key" type="varchar(255)">
                 <constraints nullable="false"/>

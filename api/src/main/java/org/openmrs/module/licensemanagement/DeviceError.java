@@ -44,8 +44,14 @@ public class DeviceError extends BaseOpenmrsData implements Serializable {
     @JoinColumn(name = "device_id", nullable = false)
     private Device device;
 
-    @Column(name = "error_type", nullable = false)
-    private String type;
+    @Column(name = "meta_type", nullable = false)
+    private String metaType;
+
+    @Column(name = "meta_sub_type")
+    private String metaSubType;
+
+    @Column(name = "meta_value")
+    private String metaValue;
 
     @Column(name = "error_key", nullable = false)
     private String key;
@@ -80,12 +86,36 @@ public class DeviceError extends BaseOpenmrsData implements Serializable {
         this.deviceErrorId = deviceErrorId;
     }
 
-    public String getType() {
-        return type;
+    public Device getDevice() {
+        return device;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setDevice(Device device) {
+        this.device = device;
+    }
+
+    public String getMetaType() {
+        return metaType;
+    }
+
+    public void setMetaType(String metaType) {
+        this.metaType = metaType;
+    }
+
+    public String getMetaSubType() {
+        return metaSubType;
+    }
+
+    public void setMetaSubType(String metaSubType) {
+        this.metaSubType = metaSubType;
+    }
+
+    public String getMetaValue() {
+        return metaValue;
+    }
+
+    public void setMetaValue(String metaValue) {
+        this.metaValue = metaValue;
     }
 
     public String getKey() {

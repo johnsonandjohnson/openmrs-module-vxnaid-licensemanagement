@@ -2,7 +2,6 @@ package org.openmrs.module.licensemanagement.api;
 
 import org.openmrs.module.licensemanagement.Device;
 import org.openmrs.module.licensemanagement.DeviceError;
-import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 public interface DeviceErrorService {
@@ -11,7 +10,7 @@ public interface DeviceErrorService {
 
     DeviceError getDeviceErrorByUuid(String uuid);
 
-    List<DeviceError> getDeviceErrorsByKey(Device device, boolean includeVoided, String key);
+    List<DeviceError> getDeviceErrorsByKey(Device device, String key, boolean includeVoided);
 
     DeviceError saveDeviceError(DeviceError deviceError);
 }

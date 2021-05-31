@@ -31,7 +31,7 @@ public class DeviceErrorServiceImpl extends BaseOpenmrsService implements Device
 
     @Override
     @Transactional(readOnly = true)
-    public List<DeviceError> getDeviceErrorsByKey(Device device, boolean includeVoided, final String key) {
+    public List<DeviceError> getDeviceErrorsByKey(Device device, final String key, boolean includeVoided) {
         return deviceErrorDAO.getDeviceErrorsByKey(device, key, includeVoided);
     }
 
