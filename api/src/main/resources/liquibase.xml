@@ -306,4 +306,72 @@
             <column name="online" type="text"/>
         </modifyColumn>
     </changeSet>
+
+    <changeSet id="licensemanagement-init-DeviceError" author="Nageswara Rao">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="licensemgmt_device_error"/>
+            </not>
+        </preConditions>
+        <comment>Creating the licensemgmt_device _error table</comment>
+        <createTable tableName="licensemgmt_device_error">
+            <!-- DeviceError-->
+            <column name="device_error_id" autoIncrement="true" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="device_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="meta_type" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="meta_sub_type" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="meta_value" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="error_key" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="meta" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="stack_trace" type="TEXT"/>
+            <column name="reported_date" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <!-- BaseOpenmrsData -->
+            <column name="creator" type="int"/>
+            <column name="changed_by" type="int"/>
+            <column name="date_changed" type="datetime"/>
+            <column name="date_created" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_voided" type="datetime"/>
+            <column name="void_reason" type="varchar(255)"/>
+            <column name="voided" type="BOOLEAN" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="voided_by" type="int"/>
+            <!-- BaseOpenmrsObject -->
+            <column name="uuid" type="char(38)"/>
+        </createTable>
+        <!-- BaseOpenmrsData -->
+        <addForeignKeyConstraint constraintName="device_error_creator_fk"
+                                 baseTableName="licensemgmt_device_error" baseColumnNames="creator"
+                                 referencedTableName="users" referencedColumnNames="user_id"/>
+        <addForeignKeyConstraint constraintName="device_error_changed_by_fk"
+                                 baseTableName="licensemgmt_device_error" baseColumnNames="changed_by"
+                                 referencedTableName="users" referencedColumnNames="user_id"/>
+        <addForeignKeyConstraint constraintName="licensemgmt_device_error_device_fk"
+                                 baseTableName="licensemgmt_device_error" baseColumnNames="device_id"
+                                 referencedTableName="licensemgmt_device" referencedColumnNames="device_id"/>
+        <addForeignKeyConstraint constraintName="licensemgmt_device_error_voided_by_fk"
+                                 baseTableName="licensemgmt_device_error" baseColumnNames="voided_by"
+                                 referencedTableName="users" referencedColumnNames="user_id"/>
+        <modifySql dbms="mssql">
+            <replace replace="CHAR(38)" with="UNIQUEIDENTIFIER NOT NULL DEFAULT NEWSEQUENTIALID()"/>
+        </modifySql>
+    </changeSet>
 </databaseChangeLog>
