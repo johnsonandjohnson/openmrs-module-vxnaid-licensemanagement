@@ -1,5 +1,7 @@
 package org.openmrs.module.licensemanagement.web.attribute;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openmrs.api.context.Context;
 import org.openmrs.customdatatype.CustomDatatype;
 import org.openmrs.customdatatype.CustomDatatypeHandler;
@@ -21,13 +23,15 @@ import java.util.regex.Pattern;
 /**
  * The LicenseManagementWebAttributeUtil Class.
  * <p>
- * This reimplemented helper from WebAttributeUtil, which did not work with {@link DeviceAttribute}. The
+ * This is reimplemented helper from WebAttributeUtil, framework did not work with {@link DeviceAttribute}. The
  * {@link DeviceAttribute} doesn't derive from {@link org.openmrs.attribute.BaseAttribute} because that class has no JPA
- * annotations.
+ * annotations, once OpenMRS framework is updated this class can be refactored-out.
  * </p>
  */
 public class LicenseManagementWebAttributeUtil extends WebAttributeUtil {
-    private static Pattern betweenSquareBrackets = Pattern.compile("\\[(\\d*)\\]");
+    private static final Pattern betweenSquareBrackets = Pattern.compile("\\[(\\d*)\\]");
+    private static final int REQUEST_PARAM_MAX_NUM = 500;
+    private static final Log LOG = LogFactory.getLog(LicenseManagementWebAttributeUtil.class);
 
     public static <CustomizableClass extends Customizable<DeviceAttribute>> void handleSubmittedDeviceAttributes(
             CustomizableClass owner, BindingResult errors, HttpServletRequest request,
@@ -39,8 +43,16 @@ public class LicenseManagementWebAttributeUtil extends WebAttributeUtil {
             final CustomDatatype dt = CustomDatatypeUtil.getDatatype(attrType);
             final CustomDatatypeHandler handler = CustomDatatypeUtil.getHandler(attrType);
 
+            int elementCount = 0;
             for (@SuppressWarnings("unchecked") Enumeration<String> iter = request.getParameterNames();
                  iter.hasMoreElements(); ) {
+
+                if (++elementCount > REQUEST_PARAM_MAX_NUM) {
+                    LOG.error("The number of request parameters to scan for attribute values exceeds the maximum value " +
+                            "of " + REQUEST_PARAM_MAX_NUM + ". Any exceeding parameter is ignored! This error may indicate" +
+                            " a DoS attack.");
+                    break;
+                }
 
                 final String paramName = iter.nextElement();
 
