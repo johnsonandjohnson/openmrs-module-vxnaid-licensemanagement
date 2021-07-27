@@ -49,7 +49,8 @@ public class LicenseManagementWebAttributeUtil extends WebAttributeUtil {
 
                 if (++elementCount > REQUEST_PARAM_MAX_NUM) {
                     LOG.error("The number of request parameters to scan for attribute values exceeds the maximum value " +
-                            "of 500. Any exceeding parameter is ignored! This error may indicate a DoS attack.");
+                            "of " + REQUEST_PARAM_MAX_NUM + ". Any exceeding parameter is ignored! This error may indicate" +
+                            " a DoS attack.");
                     break;
                 }
 
