@@ -15,15 +15,11 @@
     <name>License Management</name>
     <description>Manage licenses and devices which use them.</description>
 
-    <!-- TODO: Add module's project URL -->
-    <!--<url>https://wiki.openmrs.org/x/FQ4z</url>-->
-
-    <!-- TODO: Add SCM URLs -->
-    <!--<scm>
-        <connection>scm:git:git@github.com:openmrs/openmrs-module-licensemanagement.git</connection>
-        <developerConnection>scm:git:git@github.com:openmrs/openmrs-module-licensemanagement.git</developerConnection>
-        <url>https://github.com/openmrs/openmrs-module-licensemanagement/</url>
-    </scm>-->
+    <scm>
+        <connection>scm:git:https://sourcecode.jnj.com/scm/itx-bpv/omrs-licensemanagement.git</connection>
+        <developerConnection>scm:git:https://sourcecode.jnj.com/scm/itx-bpv/omrs-licensemanagement.git</developerConnection>
+        <url>https://sourcecode.jnj.com/scm/itx-bpv/omrs-licensemanagement.git</url>
+    </scm>
 
     <modules>
         <module>api</module>
