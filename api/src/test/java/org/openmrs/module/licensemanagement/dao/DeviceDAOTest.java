@@ -107,6 +107,20 @@ public class DeviceDAOTest extends BaseModuleContextSensitiveTest {
         assertThat(first, hasProperty("uuid", is("f08ba64b-2000-0000-0000-000000000001")));
     }
 
+
+    @Test
+    public void getDeviceByMac_shouldReturnNonRetiredCorrectDevice() {
+        // Given
+        // Data loaded from XML
+
+        // When
+        final Device first = dao.getDeviceByMac("AA:00:00:00:00:01", false);
+
+        // Then
+        assertThat(first, notNullValue());
+        assertThat(first, hasProperty("uuid", is("f08ba64b-2000-0000-0000-000000000001")));
+    }
+
     @Test
     public void getAllDevices_true_shouldReturnDevicesIncludingRetired() {
         // Given
