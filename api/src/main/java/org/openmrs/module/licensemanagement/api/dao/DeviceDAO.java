@@ -31,6 +31,13 @@ public class DeviceDAO extends BaseLicenseManagementOpenmrsMetadataDAO<Device> {
         return firstResult(criteria, Device.class);
     }
 
+    public Device getDeviceByMac(final String deviceMac, final Boolean retired) {
+        final Criteria criteria = getSession().createCriteria(Device.class);
+        criteria.add(Restrictions.eq("deviceMac", deviceMac));
+        criteria.add(Restrictions.eq("retired", retired));
+        return firstResult(criteria, Device.class);
+    }
+
     public List<Device> getAllDevices(boolean includeRetired) {
         return internalReadAll(includeRetired);
     }
