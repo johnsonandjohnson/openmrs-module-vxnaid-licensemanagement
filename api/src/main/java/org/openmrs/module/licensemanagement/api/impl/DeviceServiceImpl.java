@@ -1,5 +1,7 @@
 package org.openmrs.module.licensemanagement.api.impl;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Projections;
 import org.openmrs.api.APIException;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.customdatatype.CustomDatatypeUtil;
@@ -176,7 +178,11 @@ public class DeviceServiceImpl extends BaseOpenmrsService implements DeviceServi
         if (deviceAttributeType == null) {
             return Collections.emptyList();
         }
-
         return deviceDAO.getDeviceAttributes(deviceAttributeType);
+    }
+
+    @Override
+    public long getDeviceCount(boolean includeRetired) throws APIException {
+        return deviceDAO.getDeviceCount(includeRetired);
     }
 }

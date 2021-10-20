@@ -1,6 +1,7 @@
 package org.openmrs.module.licensemanagement.api.dao;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.openmrs.module.licensemanagement.Device;
 import org.openmrs.module.licensemanagement.DeviceAttribute;
@@ -111,4 +112,15 @@ public class DeviceDAO extends BaseLicenseManagementOpenmrsMetadataDAO<Device> {
 
         return criteria.list();
     }
+
+    public long getDeviceCount(boolean includeRetired) {
+        final Criteria criteria = getSession().createCriteria(Device.class);
+        if(!includeRetired) {
+            criteria.add(Restrictions.eq("retired", false));
+        }
+        criteria.setProjection(Projections.rowCount());
+        return (Long) criteria.uniqueResult();
+    }
+
+
 }

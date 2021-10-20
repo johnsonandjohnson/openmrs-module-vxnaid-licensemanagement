@@ -86,4 +86,7 @@ public interface DeviceService extends OpenmrsService {
 
     @Authorized(PrivilegeConstants.GET_DEVICES)
     List<DeviceAttribute> getDeviceAttributes(String deviceAttributeTypeUuid) throws APIException;
+
+    @Authorized(PrivilegeConstants.GET_DEVICES)
+    long getDeviceCount(boolean includeRetired) throws APIException;
 }

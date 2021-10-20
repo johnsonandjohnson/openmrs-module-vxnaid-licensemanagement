@@ -16,11 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 public class DeviceDAOTest extends BaseModuleContextSensitiveTest {
@@ -381,5 +383,19 @@ public class DeviceDAOTest extends BaseModuleContextSensitiveTest {
         assertThat(assignedIrisLicenses, contains(hasProperty("value", is(licenseDAO.getLicense("IRIS1"))),
                 hasProperty("value", is(licenseDAO.getLicense("IRIS2"))),
                 hasProperty("value", is(licenseDAO.getLicense("IRIS3")))));
+    }
+
+    @Test
+    public void getDeviceCount_shouldGetDeviceCountIncludingRetiredDevices() {
+        // When
+        final long count = dao.getDeviceCount(true);
+        assertThat(count,equalTo(3L));
+    }
+
+    @Test
+    public void getDeviceCount_shouldGetDeviceCountExcludingRetiredDevices() {
+        // When
+        final long count = dao.getDeviceCount(false);
+        assertThat(count,equalTo(2L));
     }
 }
