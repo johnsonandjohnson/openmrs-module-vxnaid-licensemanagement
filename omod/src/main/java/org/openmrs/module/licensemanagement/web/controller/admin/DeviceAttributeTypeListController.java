@@ -21,7 +21,7 @@ public class DeviceAttributeTypeListController {
     }
 
     @ModelAttribute("deviceAttributeTypes")
-    protected List<DeviceAttributeType> getLicenseTypes() throws Exception {
+    protected List<DeviceAttributeType> getLicenseTypes() {
         return Context.getService(DeviceService.class).getAllDeviceAttributeTypes(true);
     }
 }

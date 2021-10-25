@@ -21,7 +21,7 @@ public class LicenseTypeListController {
     }
 
     @ModelAttribute("licenseTypes")
-    protected List<LicenseType> getLicenseTypes() throws Exception {
+    protected List<LicenseType> getLicenseTypes() {
         return Context.getService(LicenseTypeService.class).getAllLicenseTypes(true);
     }
 }

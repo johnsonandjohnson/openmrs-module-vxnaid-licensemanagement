@@ -8,7 +8,7 @@ import org.springframework.util.StringUtils;
 
 import java.beans.PropertyEditorSupport;
 
-public abstract class BasePropertyEditorSupport<Entity> extends PropertyEditorSupport {
+public abstract class BasePropertyEditorSupport<E> extends PropertyEditorSupport {
     private final Log log = LogFactory.getLog(this.getClass());
     private final String entityName;
 
@@ -17,7 +17,7 @@ public abstract class BasePropertyEditorSupport<Entity> extends PropertyEditorSu
     }
 
     public String getAsText() {
-        final Entity entity = (Entity) this.getValue();
+        final E entity = (E) this.getValue();
         if (entity == null && Context.isAuthenticated()) {
             return null;
         } else {
@@ -26,7 +26,7 @@ public abstract class BasePropertyEditorSupport<Entity> extends PropertyEditorSu
     }
 
     public void setAsText(String text) throws IllegalArgumentException {
-        Entity value = null;
+        E value = null;
 
         if (StringUtils.hasText(text)) {
             try {
@@ -44,9 +44,9 @@ public abstract class BasePropertyEditorSupport<Entity> extends PropertyEditorSu
         setValue(value);
     }
 
-    abstract Integer getEntityId(Entity entity);
+    abstract Integer getEntityId(E entity);
 
-    abstract Entity getEntityById(Integer id);
+    abstract E getEntityById(Integer id);
 
-    abstract Entity getEntityByName(String text);
+    abstract E getEntityByName(String text);
 }

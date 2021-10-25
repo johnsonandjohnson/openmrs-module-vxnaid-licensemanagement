@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.beans.PropertyEditor;
 import java.util.Map;
 
-abstract class BaseFieldGenDatatypeHandler<TypeDatatype extends SerializingCustomDatatype<Type>, Type extends OpenmrsObject>
-        implements FieldGenDatatypeHandler<TypeDatatype, Type> {
+abstract class BaseFieldGenDatatypeHandler<D extends SerializingCustomDatatype<T>, T extends OpenmrsObject>
+        implements FieldGenDatatypeHandler<D, T> {
 
     private final PropertyEditor typeEditor;
 
@@ -27,7 +27,7 @@ abstract class BaseFieldGenDatatypeHandler<TypeDatatype extends SerializingCusto
     }
 
     @Override
-    public Type getValue(TypeDatatype datatype, HttpServletRequest request, String formFieldName)
+    public T getValue(D datatype, HttpServletRequest request, String formFieldName)
             throws InvalidCustomValueException {
         String formFieldValue = request.getParameter(formFieldName);
 
@@ -38,7 +38,7 @@ abstract class BaseFieldGenDatatypeHandler<TypeDatatype extends SerializingCusto
         if (StringUtils.isNumeric(formFieldValue)) {
             typeEditor.setAsText(formFieldValue);
 
-            final Type entity = (Type) typeEditor.getValue();
+            final T entity = (T) typeEditor.getValue();
 
             if (entity != null) {
                 formFieldValue = entity.getUuid();
@@ -49,12 +49,12 @@ abstract class BaseFieldGenDatatypeHandler<TypeDatatype extends SerializingCusto
     }
 
     @Override
-    public CustomDatatype.Summary toHtmlSummary(CustomDatatype<Type> datatype, String valueReference) {
+    public CustomDatatype.Summary toHtmlSummary(CustomDatatype<T> datatype, String valueReference) {
         return datatype.getTextSummary(valueReference);
     }
 
     @Override
-    public String toHtml(CustomDatatype<Type> datatype, String valueReference) {
+    public String toHtml(CustomDatatype<T> datatype, String valueReference) {
         return toHtmlSummary(datatype, valueReference).getSummary();
     }
 

@@ -36,6 +36,8 @@ import java.util.Set;
 public class Device extends BaseOpenmrsMetadata
         implements Serializable, Attributable<Device>, Customizable<DeviceAttribute> {
 
+    private static final long serialVersionUID = -4975247714948978930L;
+
     @Id
     @GeneratedValue
     @Column(name = "device_id")
