@@ -33,6 +33,7 @@ public class LicenseManagementWebAttributeUtil extends WebAttributeUtil {
     private static final int REQUEST_PARAM_MAX_NUM = 500;
     private static final Log LOG = LogFactory.getLog(LicenseManagementWebAttributeUtil.class);
 
+    @SuppressWarnings({"PMD.CyclomaticComplexity", "PMD.AvoidDeeplyNestedIfStmts", "PMD.AvoidThrowingRawExceptionTypes"})
     public static <CustomizableClass extends Customizable<DeviceAttribute>> void handleSubmittedDeviceAttributes(
             CustomizableClass owner, BindingResult errors, HttpServletRequest request,
             List<DeviceAttributeType> attributeTypes) {

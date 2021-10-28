@@ -9,7 +9,6 @@ import org.openmrs.module.licensemanagement.UsedLicense;
 import org.openmrs.module.licensemanagement.api.LicenseService;
 import org.openmrs.module.licensemanagement.api.dao.LicenseDAO;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;

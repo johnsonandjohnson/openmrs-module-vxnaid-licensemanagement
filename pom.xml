@@ -64,6 +64,9 @@
 
     <properties>
         <openmrsPlatformVersion>1.11.6</openmrsPlatformVersion>
+        <pmdPluginVersion>3.12.0</pmdPluginVersion>
+        <checkStylePluginVersion>3.1.2</checkStylePluginVersion>
+        <checkStyleVersion>9.0.1</checkStyleVersion>
     </properties>
 
     <build>
@@ -86,6 +89,58 @@
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <tagNameFormat>@{project.version}</tagNameFormat>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${checkStylePluginVersion}</version>
+                <configuration>
+                    <configLocation>checkstyle.xml</configLocation>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>${checkStyleVersion}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>verify-checkstyle</id>
+                        <phase>validate</phase>
+                        <configuration>
+                            <configLocation>checkstyle.xml</configLocation>
+                            <consoleOutput>true</consoleOutput>
+                            <failsOnError>true</failsOnError>
+                        </configuration>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>${pmdPluginVersion}</version>
+                <configuration>
+                    <rulesets>
+                        <ruleset>${project.basedir}/../pmd.xml</ruleset>
+                    </rulesets>
+                    <linkXRef>false</linkXRef>
+                    <printFailingErrors>true</printFailingErrors>
+                    <analysisCache>true</analysisCache>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>validate</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                            <goal>cpd-check</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

@@ -5,7 +5,6 @@ import org.openmrs.api.APIException;
 import org.openmrs.module.licensemanagement.License;
 import org.openmrs.module.licensemanagement.LicenseType;
 import org.openmrs.module.licensemanagement.UsedLicense;
-import org.openmrs.module.licensemanagement.api.dao.DeviceDAO;
 import org.openmrs.module.licensemanagement.api.dao.LicenseDAO;
 import org.openmrs.module.licensemanagement.util.PrivilegeConstants;
 

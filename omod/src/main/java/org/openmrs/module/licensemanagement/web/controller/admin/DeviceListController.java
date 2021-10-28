@@ -21,7 +21,7 @@ public class DeviceListController {
     }
 
     @ModelAttribute("devices")
-    protected List<Device> getDevices() throws Exception {
+    protected List<Device> getDevices() {
         return Context.getService(DeviceService.class).getAllDevices(true);
     }
 }

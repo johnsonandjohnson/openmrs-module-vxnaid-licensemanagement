@@ -35,6 +35,8 @@ import java.util.Date;
 @Table(name = "licensemgmt_device_error")
 public class DeviceError extends BaseOpenmrsData implements Serializable {
 
+    private static final long serialVersionUID = 349906371904556770L;
+
     @Id
     @GeneratedValue
     @Column(name = "device_error_id")
