@@ -1,0 +1,79 @@
+common:
+  buildAnalysis:
+    announcements:
+      enabled: false
+    enabled: false
+  lint:
+    configLocation: checkstyle.xml
+    enabled: false
+    type: maven-checkstyle
+    violationSeverity: error
+  mergeConflict:
+    enabled: true
+  pipelineType: maven
+  staticAnalysis:
+    createEmptyAnalyis: false
+    enabled: true
+    longLivedAnalysis: false
+    shortLivedAnalysis: false
+    type: sonar
+  unitTest:
+    enabled: true
+    type: maven
+    dockerImage: jnj.artifactrepo.jnj.com/jpm/maven:3.6.3-jdk-8
+    executeOnError: false
+    ignoreError: false
+  versionCalculation:
+    confirmVersion: false
+    enabled: false
+    patternType: jnj-dev-branch
+    publish:
+      enabled: false
+    type: gitversion
+  maven:
+    repositories:
+      - id: taur-maven-release
+        name: taur-maven-release
+        url: https://artifactrepo.jnj.com/artifactory/taur-maven-release
+        credentialsId: jnj-eat-artifactory-build
+        snapshots: false
+        plugins: true
+      - id: taur-maven-snapshot
+        name: taur-maven-snapshot
+        url: https://artifactrepo.jnj.com/artifactory/taur-maven-snapshot
+        credentialsId: jnj-eat-artifactory-build
+        snapshots: true
+        plugins: true
+      - id: jnj-java
+        name: jnj-java
+        url: https://artifactrepo.jnj.com/artifactory/jnj-java
+        credentialsId: jnj-eat-artifactory-build
+        snapshots: false
+        plugins: true  
+  package:
+    enabled: false
+
+environments:
+  PREDEV:
+    mergeConflict:
+      enable: true
+      targetBranch: development
+    lint:
+      enabled: false
+    staticAnalysis:
+      enabled: true
+      shortLivedAnalysis: true
+      longLivedAnalysis: true
+    unitTest:
+      enabled: true
+  DEV:
+    versionCalculation:
+      patternType: jnj-dev-branch
+    unitTest:
+      enabled: false
+
+  PROD:
+    versionCalculation:
+      patternType: jnj-master-branch
+    unitTest:
+      enabled: false
