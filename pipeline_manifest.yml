@@ -1,4 +1,5 @@
 common:
+  pipelineType: maven
   buildAnalysis:
     announcements:
       enabled: false
@@ -10,27 +11,25 @@ common:
     violationSeverity: error
   mergeConflict:
     enabled: true
-  pipelineType: maven
   staticAnalysis:
+    enabled: false
+    type: sonar
     createEmptyAnalyis: false
-    enabled: true
     longLivedAnalysis: false
     shortLivedAnalysis: false
-    type: sonar
   unitTest:
-    enabled: true
+    enabled: false
     type: maven
     dockerImage: jnj.artifactrepo.jnj.com/jpm/maven:3.6.3-jdk-8
     executeOnError: false
     ignoreError: false
   versionCalculation:
-    confirmVersion: false
     enabled: false
+    confirmVersion: false
     patternType: jnj-dev-branch
     type: gitversion
   publish:
     enabled: false
-
   maven:
     repositories:
       - id: taur-maven-release
@@ -50,32 +49,48 @@ common:
         url: https://artifactrepo.jnj.com/artifactory/jnj-java
         credentialsId: jnj-eat-artifactory-build
         snapshots: false
-        plugins: true  
-  package:
-    enabled: false
+        plugins: true
 
 environments:
   PREDEV:
-    mergeConflict:
-      enable: true
-      targetBranch: development
     lint:
+      enabled: false
+    unitTest:
       enabled: true
     staticAnalysis:
       enabled: true
       shortLivedAnalysis: true
       longLivedAnalysis: true
-    unitTest:
-      enabled: true
-
   DEV:
-    versionCalculation:
-      patternType: jnj-dev-branch
+    lint:
+      enabled: true
+    staticAnalysis:
+      enabled: true
+      shortLivedAnalysis: false
+      longLivedAnalysis: true
     unitTest:
       enabled: true
-
-  PROD:
     versionCalculation:
-      patternType: jnj-master-branch
-    unitTest:
-      enabled: false
+      enabled: true
+    package:
+      enabled: true
+  Staging:
+      versionCalculation:
+        allowBuildParameters: true
+        enabled: true
+        type: maven
+        groupId: org.openmrs.module
+        artifactId: licensemanagement
+      resolveArtifacts:
+        allowBuildParameters: true
+        enabled: true
+        groupId: org.openmrs.module
+        artifactId: licensemanagement
+      package:
+        enabled: false
+        type: maven
+      publish:
+        allowBuildParameters: true
+        enabled: false
+        server: https://artifactrepo.jnj.com/artifactory/taur-maven-release
+        credentialsId: jnj-eat-artifactory-build
