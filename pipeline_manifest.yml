@@ -60,7 +60,7 @@ environments:
       enable: true
       targetBranch: development
     lint:
-      enabled: false
+      enabled: true
     staticAnalysis:
       enabled: true
       shortLivedAnalysis: true

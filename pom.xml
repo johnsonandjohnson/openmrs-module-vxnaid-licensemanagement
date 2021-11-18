@@ -40,6 +40,11 @@
 
     <repositories>
         <repository>
+            <id>jnj-java</id>
+            <name>jnj-java</name>
+            <url>https://artifactrepo.jnj.com/artifactory/jnj-java</url>
+        </repository>
+        <repository>
             <id>openmrs-repo</id>
             <name>OpenMRS Nexus Repository</name>
             <url>http://mavenrepo.openmrs.org/nexus/content/repositories/public</url>
