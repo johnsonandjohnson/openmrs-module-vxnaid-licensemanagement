@@ -141,3 +141,10 @@ Desktop.ini
 # JHipster JDL
 ######################
 dev/*.png
+
+​
+### SonarQube Analysis ##
+.scannerwork/
+​
+### Logs ###
+*.log.*
