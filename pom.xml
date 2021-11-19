@@ -67,18 +67,18 @@
         </pluginRepository>
     </pluginRepositories>
 
-  <distributionManagement>
-    <repository>
-      <id>central</id>
-      <name>awsalgnva1134-releases</name>
-      <url>https://artifactrepo.jnj.com/artifactory/taur-maven-release</url>
-    </repository>
-    <snapshotRepository>
-      <id>snapshots</id>
-      <name>awsalgnva1134-snapshots</name>
-      <url>https://artifactrepo.jnj.com/artifactory/taur-maven-snapshot</url>
-    </snapshotRepository>
-  </distributionManagement>
+    <distributionManagement>
+        <repository>
+            <id>central</id>
+            <name>awsalgnva1134-releases</name>
+            <url>https://artifactrepo.jnj.com/artifactory/taur-maven-snapshot</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>awsalgnva1134-snapshots</name>
+            <url>https://artifactrepo.jnj.com/artifactory/taur-maven-snapshot</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <properties>
         <openmrsPlatformVersion>1.11.6</openmrsPlatformVersion>
