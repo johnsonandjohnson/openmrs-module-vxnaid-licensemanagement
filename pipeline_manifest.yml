@@ -74,6 +74,11 @@ environments:
       enabled: true
     package:
       enabled: true
+    publish:
+      allowBuildParameters: true
+      enabled: true
+      server: https://artifactrepo.jnj.com/artifactory/taur-maven-snapshot
+      credentialsId: jnj-eat-artifactory-build
   Staging:
       versionCalculation:
         allowBuildParameters: true
@@ -91,6 +96,6 @@ environments:
         type: maven
       publish:
         allowBuildParameters: true
-        enabled: false
+        enabled: true
         server: https://artifactrepo.jnj.com/artifactory/taur-maven-release
         credentialsId: jnj-eat-artifactory-build
