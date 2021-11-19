@@ -35,19 +35,19 @@ common:
       - id: taur-maven-release
         name: taur-maven-release
         url: https://artifactrepo.jnj.com/artifactory/taur-maven-release
-        credentialsId: jnj-eat-artifactory-build
+        credentialsId: sourcecode-bitbucket
         snapshots: false
         plugins: true
       - id: taur-maven-snapshot
         name: taur-maven-snapshot
         url: https://artifactrepo.jnj.com/artifactory/taur-maven-snapshot
-        credentialsId: jnj-eat-artifactory-build
+        credentialsId: sourcecode-bitbucket
         snapshots: true
         plugins: true
       - id: jnj-java
         name: jnj-java
         url: https://artifactrepo.jnj.com/artifactory/jnj-java
-        credentialsId: jnj-eat-artifactory-build
+        credentialsId: sourcecode-bitbucket
         snapshots: false
         plugins: true
 
