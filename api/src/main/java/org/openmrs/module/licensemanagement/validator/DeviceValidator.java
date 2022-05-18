@@ -7,7 +7,7 @@ import org.springframework.validation.Validator;
 
 public class DeviceValidator implements Validator {
     @Override
-    public boolean supports(Class c) {
+    public boolean supports(Class<?> c) {
         return c.equals(Device.class);
     }
 

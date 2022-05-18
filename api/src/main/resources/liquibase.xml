@@ -13,7 +13,7 @@
         for a list of supported elements and attributes
     -->
 
-    <changeSet id="licensemanagement-init-Device" author="Piotr Wargulak">
+    <changeSet id="licensemanagement-init-Device" author="Connect for Life">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="licensemgmt_device"/>
@@ -63,7 +63,7 @@
         </modifySql>
     </changeSet>
 
-    <changeSet id="licensemanagement-init-DeviceAttributeType" author="Piotr Wargulak">
+    <changeSet id="licensemanagement-init-DeviceAttributeType" author="Connect for Life">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="licensemgmt_device_attribute_type"/>
@@ -120,7 +120,7 @@
         </modifySql>
     </changeSet>
 
-    <changeSet id="licensemanagement-init-DeviceAttribute" author="Piotr Wargulak">
+    <changeSet id="licensemanagement-init-DeviceAttribute" author="Connect for Life">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="licensemgmt_device_attribute"/>
@@ -184,7 +184,7 @@
         </modifySql>
     </changeSet>
 
-    <changeSet id="licensemanagement-init-LicenseType" author="Piotr Wargulak">
+    <changeSet id="licensemanagement-init-LicenseType" author="Connect for Life">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="licensemgmt_license_type"/>
@@ -233,7 +233,7 @@
         </modifySql>
     </changeSet>
 
-    <changeSet id="licensemanagement-init-License" author="Piotr Wargulak">
+    <changeSet id="licensemanagement-init-License" author="Connect for Life">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="licensemgmt_license"/>
@@ -291,23 +291,44 @@
         </modifySql>
     </changeSet>
 
-    <changeSet id="licensemanagement-License-name-nullable" author="Piotr Wargulak">
+    <changeSet id="licensemanagement-License-name-nullable" author="Connect for Life">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="NO">
+                select is_nullable
+                from information_schema.columns
+                where table_name = 'licensemgmt_license' and column_name = 'name'
+            </sqlCheck>
+        </preConditions>
         <dropNotNullConstraint tableName="licensemgmt_license" columnName="name" columnDataType="varchar(255)"/>
     </changeSet>
 
-    <changeSet id="licensemanagement-missing-datatype" author="Piotr Wargulak">
+    <changeSet id="licensemanagement-missing-datatype" author="Connect for Life">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="licensemgmt_device_attribute_type" columnName="datatype" />
+            </not>
+        </preConditions>
         <addColumn tableName="licensemgmt_device_attribute_type">
             <column name="datatype" type="varchar(255)"/>
         </addColumn>
     </changeSet>
 
-    <changeSet id="licensemanagement-online-changed-to-text" author="Piotr Wargulak">
+    <changeSet id="licensemanagement-online-changed-to-text" author="Connect for Life">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sqlCheck expectedResult="text">
+                    select data_type
+                    from information_schema.columns
+                    where table_name = 'licensemgmt_license' and column_name = 'online'
+                </sqlCheck>
+            </not>
+        </preConditions>
         <modifyColumn tableName="licensemgmt_license">
             <column name="online" type="text"/>
         </modifyColumn>
     </changeSet>
 
-    <changeSet id="licensemanagement-init-DeviceError" author="Nageswara Rao">
+    <changeSet id="licensemanagement-init-DeviceError" author="Connect for Life">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="licensemgmt_device_error"/>

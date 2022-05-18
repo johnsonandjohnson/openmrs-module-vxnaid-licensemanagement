@@ -70,7 +70,7 @@ public class LicenseDAO extends BaseLicenseManagementOpenmrsMetadataDAO<License>
     }
 
     public List<DeviceAttribute> getDeviceAttributeWithLicense(LicenseType licenseType) {
-        final List attributeIds = getSession().createSQLQuery(GET_DEVICE_ATTRIBUTE_WITH_LICENSE_SQL)
+        final List<?> attributeIds = getSession().createSQLQuery(GET_DEVICE_ATTRIBUTE_WITH_LICENSE_SQL)
                                               .setParameter("licenseTypeId", licenseType.getId()).list();
 
         final List<DeviceAttribute> result = new ArrayList<DeviceAttribute>();
@@ -86,7 +86,7 @@ public class LicenseDAO extends BaseLicenseManagementOpenmrsMetadataDAO<License>
     }
 
     public List<License> getLicenseNotLinkedByDeviceAttribute(LicenseType licenseType) {
-        final List licenseIds = getSession().createSQLQuery(GET_LICENSE_NOT_LINKED_BY_DEVICE_ATTRIBUTE_SQL)
+        final List<?> licenseIds = getSession().createSQLQuery(GET_LICENSE_NOT_LINKED_BY_DEVICE_ATTRIBUTE_SQL)
                                             .setParameter("licenseTypeId", licenseType.getId()).list();
 
         final List<License> result = new ArrayList<License>();

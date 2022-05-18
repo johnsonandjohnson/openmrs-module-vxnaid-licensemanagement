@@ -4,7 +4,7 @@ import org.openmrs.OpenmrsObject;
 import org.openmrs.web.taglib.fieldgen.AbstractFieldGenHandler;
 import org.openmrs.web.taglib.fieldgen.FieldGenHandler;
 
-public abstract class BaseFieldGenHandler extends AbstractFieldGenHandler implements FieldGenHandler {
+public abstract class BaseFieldGenHandler extends AbstractFieldGenHandler {
     private final String defaultUrl;
 
     BaseFieldGenHandler(final String defaultUrl) {

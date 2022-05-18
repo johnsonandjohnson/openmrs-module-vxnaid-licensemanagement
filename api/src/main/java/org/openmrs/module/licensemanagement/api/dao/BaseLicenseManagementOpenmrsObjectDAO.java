@@ -35,7 +35,7 @@ abstract class BaseLicenseManagementOpenmrsObjectDAO<E extends OpenmrsObject> {
      * @return the first result or null if there was no results
      */
     <T extends OpenmrsObject> T firstResult(final Criteria criteria, final Class<T> resultType) {
-        final List entities = criteria.list();
+        final List<?> entities = criteria.list();
 
         if (entities.isEmpty()) {
             return null;

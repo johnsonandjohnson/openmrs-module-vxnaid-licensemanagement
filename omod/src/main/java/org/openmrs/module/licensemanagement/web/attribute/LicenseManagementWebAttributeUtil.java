@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
  * </p>
  */
 public class LicenseManagementWebAttributeUtil extends WebAttributeUtil {
-    private static final Pattern betweenSquareBrackets = Pattern.compile("\\[(\\d*)\\]");
+    private static final Pattern betweenSquareBrackets = Pattern.compile("\\[(\\d*)]");
     private static final int REQUEST_PARAM_MAX_NUM = 500;
     private static final Log LOG = LogFactory.getLog(LicenseManagementWebAttributeUtil.class);
 
@@ -41,7 +41,7 @@ public class LicenseManagementWebAttributeUtil extends WebAttributeUtil {
         final List<DeviceAttribute> toVoid = new ArrayList<DeviceAttribute>();
 
         for (final DeviceAttributeType attrType : attributeTypes) {
-            final CustomDatatype dt = CustomDatatypeUtil.getDatatype(attrType);
+            final CustomDatatype<?> dt = CustomDatatypeUtil.getDatatype(attrType);
             final CustomDatatypeHandler handler = CustomDatatypeUtil.getHandler(attrType);
 
             int elementCount = 0;

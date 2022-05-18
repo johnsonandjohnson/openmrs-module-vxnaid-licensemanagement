@@ -16,6 +16,7 @@ public abstract class BasePropertyEditorSupport<E> extends PropertyEditorSupport
         this.entityName = entityName;
     }
 
+    @Override
     public String getAsText() {
         final E entity = (E) this.getValue();
         if (entity == null && Context.isAuthenticated()) {
@@ -25,6 +26,7 @@ public abstract class BasePropertyEditorSupport<E> extends PropertyEditorSupport
         }
     }
 
+    @Override
     public void setAsText(String text) throws IllegalArgumentException {
         E value = null;
 
