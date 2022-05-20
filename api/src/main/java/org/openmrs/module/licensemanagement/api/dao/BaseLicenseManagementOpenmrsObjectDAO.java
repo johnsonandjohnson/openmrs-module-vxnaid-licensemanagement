@@ -1,3 +1,13 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public License,
+ * v. 2.0. If a copy of the MPL was not distributed with this file, You can
+ * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
+ * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
+ * <p>
+ * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+ * graphic logo is a trademark of OpenMRS Inc.
+ */
+
 package org.openmrs.module.licensemanagement.api.dao;
 
 import org.hibernate.Criteria;
@@ -35,7 +45,7 @@ abstract class BaseLicenseManagementOpenmrsObjectDAO<E extends OpenmrsObject> {
      * @return the first result or null if there was no results
      */
     <T extends OpenmrsObject> T firstResult(final Criteria criteria, final Class<T> resultType) {
-        final List entities = criteria.list();
+        final List<?> entities = criteria.list();
 
         if (entities.isEmpty()) {
             return null;

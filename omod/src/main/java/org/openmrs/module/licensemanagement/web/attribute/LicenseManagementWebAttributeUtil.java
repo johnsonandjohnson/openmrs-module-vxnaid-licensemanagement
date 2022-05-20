@@ -1,3 +1,13 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public License,
+ * v. 2.0. If a copy of the MPL was not distributed with this file, You can
+ * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
+ * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
+ * <p>
+ * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+ * graphic logo is a trademark of OpenMRS Inc.
+ */
+
 package org.openmrs.module.licensemanagement.web.attribute;
 
 import org.apache.commons.logging.Log;
@@ -29,7 +39,7 @@ import java.util.regex.Pattern;
  * </p>
  */
 public class LicenseManagementWebAttributeUtil extends WebAttributeUtil {
-    private static final Pattern betweenSquareBrackets = Pattern.compile("\\[(\\d*)\\]");
+    private static final Pattern betweenSquareBrackets = Pattern.compile("\\[(\\d*)]");
     private static final int REQUEST_PARAM_MAX_NUM = 500;
     private static final Log LOG = LogFactory.getLog(LicenseManagementWebAttributeUtil.class);
 
@@ -41,7 +51,7 @@ public class LicenseManagementWebAttributeUtil extends WebAttributeUtil {
         final List<DeviceAttribute> toVoid = new ArrayList<DeviceAttribute>();
 
         for (final DeviceAttributeType attrType : attributeTypes) {
-            final CustomDatatype dt = CustomDatatypeUtil.getDatatype(attrType);
+            final CustomDatatype<?> dt = CustomDatatypeUtil.getDatatype(attrType);
             final CustomDatatypeHandler handler = CustomDatatypeUtil.getHandler(attrType);
 
             int elementCount = 0;
