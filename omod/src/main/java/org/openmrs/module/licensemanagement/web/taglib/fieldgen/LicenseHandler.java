@@ -42,7 +42,7 @@ public class LicenseHandler extends BaseFieldGenHandler {
     @Override
     void loadAdditionalData() {
         final LicenseService licenseService = Context.getService(LicenseService.class);
-        final List<License> licenses = licenseService.getAllLicenses();
+        final List<License> licenses = licenseService.getAllLicenses(true);
         setParameter("licenses", licenses);
     }
 }

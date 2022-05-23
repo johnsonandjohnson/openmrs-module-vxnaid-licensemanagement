@@ -30,7 +30,9 @@
         </c:if>
         <c:forEach var="license" items="${licenses}">
             <option value="${license.licenseId}"
-                    <c:if test="${license.licenseId == initialValue}">selected</c:if>>${license.displayString}</option>
+                    <c:if test="${license.licenseId == initialValue}">selected</c:if>>
+                <c:if test="${license.retired}">(RETIRED) </c:if>${license.displayString}
+            </option>
         </c:forEach>
     </select>
 </c:if>

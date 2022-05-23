@@ -64,14 +64,4 @@ public class DeviceAttributeType extends BaseAttributeType<Device> implements Se
   public void setDeviceAttributeTypeId(Integer deviceAttributeTypeId) {
     this.deviceAttributeTypeId = deviceAttributeTypeId;
   }
-
-  @Override
-  public boolean equals(Object obj) {
-    return super.equals(obj);
-  }
-
-  @Override
-  public int hashCode() {
-    return super.hashCode();
-  }
 }

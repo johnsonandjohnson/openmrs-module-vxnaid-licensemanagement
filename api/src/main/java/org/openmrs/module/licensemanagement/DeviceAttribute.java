@@ -160,16 +160,6 @@ public class DeviceAttribute extends BaseOpenmrsData
   }
 
   @Override
-  public boolean equals(Object obj) {
-    return super.equals(obj);
-  }
-
-  @Override
-  public int hashCode() {
-    return super.hashCode();
-  }
-
-  @Override
   public int compareTo(DeviceAttribute other) {
     if (other == null) {
       return -1;
