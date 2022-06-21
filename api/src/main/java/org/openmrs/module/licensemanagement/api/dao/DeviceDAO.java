@@ -20,6 +20,7 @@ import org.openmrs.module.licensemanagement.DeviceAttributeType;
 import java.util.List;
 
 public class DeviceDAO extends BaseLicenseManagementOpenmrsMetadataDAO<Device> {
+    private static final String RETIRED_PROP = "retired";
 
     public DeviceDAO() {
         super(Device.class);
@@ -45,7 +46,7 @@ public class DeviceDAO extends BaseLicenseManagementOpenmrsMetadataDAO<Device> {
     public Device getDeviceByMac(final String deviceMac, final Boolean retired) {
         final Criteria criteria = getSession().createCriteria(Device.class);
         criteria.add(Restrictions.eq("deviceMac", deviceMac));
-        criteria.add(Restrictions.eq("retired", retired));
+        criteria.add(Restrictions.eq(RETIRED_PROP, retired));
         return firstResult(criteria, Device.class);
     }
 
@@ -83,7 +84,7 @@ public class DeviceDAO extends BaseLicenseManagementOpenmrsMetadataDAO<Device> {
         final Criteria criteria = getSession().createCriteria(DeviceAttributeType.class);
 
         if (!includeRetired) {
-            criteria.add(Restrictions.eq("retired", false));
+            criteria.add(Restrictions.eq(RETIRED_PROP, false));
         }
 
         return criteria.list();
@@ -126,7 +127,7 @@ public class DeviceDAO extends BaseLicenseManagementOpenmrsMetadataDAO<Device> {
     public long getDeviceCount(boolean includeRetired) {
         final Criteria criteria = getSession().createCriteria(Device.class);
         if(!includeRetired) {
-            criteria.add(Restrictions.eq("retired", false));
+            criteria.add(Restrictions.eq(RETIRED_PROP, false));
         }
         criteria.setProjection(Projections.rowCount());
         return (Long) criteria.uniqueResult();
