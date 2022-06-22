@@ -35,7 +35,7 @@ import java.util.regex.Pattern;
  * <p>
  * This is reimplemented helper from WebAttributeUtil, framework did not work with {@link DeviceAttribute}. The
  * {@link DeviceAttribute} doesn't derive from {@link org.openmrs.attribute.BaseAttribute} because that class has no JPA
- * annotations, once OpenMRS framework is updated this class can be refactored-out.
+ * annotations, once OpenMRS framework is updated this class can be deleted.
  * </p>
  */
 public class LicenseManagementWebAttributeUtil extends WebAttributeUtil {
@@ -43,7 +43,7 @@ public class LicenseManagementWebAttributeUtil extends WebAttributeUtil {
     private static final int REQUEST_PARAM_MAX_NUM = 500;
     private static final Log LOG = LogFactory.getLog(LicenseManagementWebAttributeUtil.class);
 
-    @SuppressWarnings({"PMD.CyclomaticComplexity", "PMD.AvoidDeeplyNestedIfStmts", "PMD.AvoidThrowingRawExceptionTypes"})
+    @SuppressWarnings({"PMD.CyclomaticComplexity", "PMD.AvoidDeeplyNestedIfStmts", "PMD.AvoidThrowingRawExceptionTypes", "java:S3776"})
     public static <CustomizableClass extends Customizable<DeviceAttribute>> void handleSubmittedDeviceAttributes(
             CustomizableClass owner, BindingResult errors, HttpServletRequest request,
             List<DeviceAttributeType> attributeTypes) {
