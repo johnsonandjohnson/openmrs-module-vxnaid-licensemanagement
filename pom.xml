@@ -8,16 +8,16 @@
     </parent>
 
     <groupId>org.openmrs.module</groupId>
-    <artifactId>licensemanagement</artifactId>
+    <artifactId>vxnaidlicensemanagement</artifactId>
     <version>1.1.3-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>License Management</name>
     <description>Manage licenses and devices which use them.</description>
 
     <scm>
-        <connection>scm:git:https://sourcecode.jnj.com/scm/itx-bpv/omrs-licensemanagement.git</connection>
-        <developerConnection>scm:git:https://sourcecode.jnj.com/scm/itx-bpv/omrs-licensemanagement.git</developerConnection>
-        <url>https://sourcecode.jnj.com/scm/itx-bpv/omrs-licensemanagement.git</url>
+        <connection>scm:git:https://sourcecode.jnj.com/scm/itx-bpv/openmrs-module-vxnaid-licensemanagement.git</connection>
+        <developerConnection>scm:git:https://sourcecode.jnj.com/scm/itx-bpv/openmrs-module-vxnaid-licensemanagement.git</developerConnection>
+        <url>https://sourcecode.jnj.com/scm/itx-bpv/openmrs-module-vxnaid-licensemanagement.git</url>
       <tag>HEAD</tag>
   </scm>
 
