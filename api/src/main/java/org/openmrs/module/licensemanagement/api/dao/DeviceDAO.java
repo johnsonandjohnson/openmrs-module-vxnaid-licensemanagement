@@ -84,7 +84,7 @@ public class DeviceDAO extends BaseLicenseManagementOpenmrsMetadataDAO<Device> {
         final Criteria criteria = getSession().createCriteria(DeviceAttributeType.class);
 
         if (!includeRetired) {
-            criteria.add(Restrictions.eq(RETIRED_PROP, false));
+            criteria.add(Restrictions.eq(RETIRED_PROP, Boolean.FALSE));
         }
 
         return criteria.list();
@@ -127,7 +127,7 @@ public class DeviceDAO extends BaseLicenseManagementOpenmrsMetadataDAO<Device> {
     public long getDeviceCount(boolean includeRetired) {
         final Criteria criteria = getSession().createCriteria(Device.class);
         if(!includeRetired) {
-            criteria.add(Restrictions.eq(RETIRED_PROP, false));
+            criteria.add(Restrictions.eq(RETIRED_PROP, Boolean.FALSE));
         }
         criteria.setProjection(Projections.rowCount());
         return (Long) criteria.uniqueResult();
