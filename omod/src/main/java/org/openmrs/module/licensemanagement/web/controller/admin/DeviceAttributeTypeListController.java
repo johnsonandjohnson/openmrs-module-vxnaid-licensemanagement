@@ -23,7 +23,7 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "module/licensemanagement/admin/deviceAttributeType.list")
 public class DeviceAttributeTypeListController {
-    private static final String VIEW = "/module/licensemanagement/admin/deviceAttributeTypeList";
+    private static final String VIEW = "/module/vxnaidlicensemanagement/admin/deviceAttributeTypeList";
 
     @RequestMapping(method = RequestMethod.GET)
     public String onGet() {

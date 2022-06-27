@@ -23,7 +23,7 @@ import java.util.List;
 @Controller("${rootrootArtifactId}.DeviceListController")
 @RequestMapping(value = "module/licensemanagement/admin/device.list")
 public class DeviceListController {
-    private static final String VIEW = "/module/licensemanagement/admin/deviceList";
+    private static final String VIEW = "/module/vxnaidlicensemanagement/admin/deviceList";
 
     @RequestMapping(method = RequestMethod.GET)
     public String onGet() {

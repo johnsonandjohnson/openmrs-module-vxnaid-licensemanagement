@@ -1,5 +1,5 @@
 <%@ include file="/WEB-INF/template/include.jsp" %>
-<%@ taglib prefix="licensemanagement" tagdir="/WEB-INF/tags/module/licensemanagement" %>
+<%@ taglib prefix="vxnaidlicensemanagement" tagdir="/WEB-INF/tags/module/vxnaidlicensemanagement" %>
 
 <%--
   ~ This Source Code Form is subject to the terms of the Mozilla Public License,
@@ -80,7 +80,7 @@
                         class="required">*</span></th>
                 <td>
                     <spring:bind path="license.licenseType">
-                        <licensemanagement:licenseTypeField licenseTypes="${licenseTypes}" formFieldName="licenseType"
+                        <vxnaidlicensemanagement:licenseTypeField licenseTypes="${licenseTypes}" formFieldName="licenseType"
                                                             initialValue="${status.value}"/>
                         <c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
                     </spring:bind>

@@ -33,7 +33,7 @@ public class LicenseTypeHandler extends BaseFieldGenHandler {
      * ./fieldGen/module/licensemanagement/*, it's in ./module/licensemanagement/fieldGen/*.
      * </p>
      */
-    private final static String DEFAULT_URL = "../module/licensemanagement/fieldGen/licenseType.field";
+    private final static String DEFAULT_URL = "../module/vxnaidlicensemanagement/fieldGen/licenseType.field";
 
     public LicenseTypeHandler() {
         super(DEFAULT_URL);

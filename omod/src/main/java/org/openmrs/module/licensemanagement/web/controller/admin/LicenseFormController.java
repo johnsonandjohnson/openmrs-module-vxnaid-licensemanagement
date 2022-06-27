@@ -33,7 +33,7 @@ import java.util.List;
 
 @Controller
 public class LicenseFormController {
-    private static final String VIEW = "/module/licensemanagement/admin/licenseForm";
+    private static final String VIEW = "/module/vxnaidlicensemanagement/admin/licenseForm";
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {

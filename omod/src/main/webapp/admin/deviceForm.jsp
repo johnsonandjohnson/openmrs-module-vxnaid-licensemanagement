@@ -1,5 +1,4 @@
 <%@ include file="/WEB-INF/template/include.jsp" %>
-<%@ taglib prefix="licensemanagement" tagdir="/WEB-INF/tags/module/licensemanagement" %>
 
 <%--
   ~ This Source Code Form is subject to the terms of the Mozilla Public License,

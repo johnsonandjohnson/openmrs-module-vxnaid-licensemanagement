@@ -29,7 +29,7 @@ import java.util.Collection;
 
 @Controller
 public class DeviceAttributeTypeFormController {
-    private static final String VIEW = "/module/licensemanagement/admin/deviceAttributeTypeForm";
+    private static final String VIEW = "/module/vxnaidlicensemanagement/admin/deviceAttributeTypeForm";
 
     @ModelAttribute("datatypes")
     public Collection<String> getDatatypes() {

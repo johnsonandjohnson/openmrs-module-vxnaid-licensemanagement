@@ -36,7 +36,7 @@ import java.util.List;
 
 @Controller
 public class DeviceFormController {
-    private static final String VIEW = "/module/licensemanagement/admin/deviceForm";
+    private static final String VIEW = "/module/vxnaidlicensemanagement/admin/deviceForm";
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {

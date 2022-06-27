@@ -26,7 +26,7 @@ import org.springframework.web.context.request.WebRequest;
 
 @Controller
 public class LicenseTypeFormController {
-    private static final String VIEW = "/module/licensemanagement/admin/licenseTypeForm";
+    private static final String VIEW = "/module/vxnaidlicensemanagement/admin/licenseTypeForm";
 
     @ModelAttribute("licenseType")
     public LicenseType formBackingObject(@RequestParam(value = "licenseTypeId", required = false) String licenseTypeId) {

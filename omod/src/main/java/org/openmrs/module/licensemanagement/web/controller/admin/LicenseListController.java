@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
-@Controller("${rootrootArtifactId}.LicenseListController")
+@Controller("licensemanagement.LicenseListController")
 @RequestMapping(value = "module/licensemanagement/admin/license.list")
 public class LicenseListController {
-    private static final String VIEW = "/module/licensemanagement/admin/licenseList";
+    private static final String VIEW = "/module/vxnaidlicensemanagement/admin/licenseList";
 
     @RequestMapping(method = RequestMethod.GET)
     public String onGet() {

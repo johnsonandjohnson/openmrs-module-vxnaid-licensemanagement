@@ -1,5 +1,5 @@
 <%@ include file="/WEB-INF/template/include.jsp" %>
-<%@ taglib prefix="licensemanagement" tagdir="/WEB-INF/tags/module/licensemanagement" %>
+<%@ taglib prefix="licensemanagement" tagdir="/WEB-INF/tags/module/vxnaidlicensemanagement" %>
 
 <%--
   ~ This Source Code Form is subject to the terms of the Mozilla Public License,
@@ -11,5 +11,5 @@
   ~ graphic logo is a trademark of OpenMRS Inc.
   --%>
 
-<licensemanagement:licenseTypeField licenseTypes="${model.licenseTypes}" formFieldName="${model.formFieldName}"
+<vxnaidlicensemanagement:licenseTypeField licenseTypes="${model.licenseTypes}" formFieldName="${model.formFieldName}"
                                     initialValue="${model.initialValue}"/>
