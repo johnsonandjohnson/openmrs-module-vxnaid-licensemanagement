@@ -41,6 +41,19 @@ public interface DeviceService extends OpenmrsService {
     Device getDeviceByMAC(String deviceMac, Boolean retired) throws APIException;
 
     @Authorized(PrivilegeConstants.GET_DEVICES)
+    Device getDeviceByWindows(String deviceWindows) throws APIException;
+
+    @Authorized(PrivilegeConstants.GET_DEVICES)
+    Device getDeviceByWindows(String deviceWindows, Boolean retired) throws APIException;
+
+    @Authorized(PrivilegeConstants.GET_DEVICES)
+    Device getDeviceByLinux(String deviceLinux) throws APIException;
+
+    @Authorized(PrivilegeConstants.GET_DEVICES)
+    Device getDeviceByLinux(String deviceLinux, Boolean retired) throws APIException;
+
+
+    @Authorized(PrivilegeConstants.GET_DEVICES)
     List<Device> getAllDevices() throws APIException;
 
     @Authorized(PrivilegeConstants.GET_DEVICES)
